@@ -1,0 +1,102 @@
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+#ostatni
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/shop')
+def shop():
+    return render_template('shop.html')
+
+@app.route('/contacts')
+def contacts():
+    return render_template('contacts.html')
+
+@app.route('/phantasmal')
+def phantasmal():
+    return render_template('phantasmalflamesetb.html')
+
+@app.route('/ucet')
+def ucet():
+    return render_template('ucet.html')
+
+@app.route('/kosik')
+def kosik():
+    return render_template('kosik.html')
+
+#phantasmal
+
+@app.route('/phantasmalflamespack')
+def phantasmalflamespack():
+    return render_template('phantasmalflamespack.html')
+
+@app.route('/phantasmalflamesboosterbundle')
+def phantasmalflamesboosterbundle():
+    return render_template('phantasmalflamesboosterbundle.html')
+
+@app.route('/phantasmalflamesboosterbox')
+def phantasmalflamesboosterbox():
+    return render_template('phantasmalflamesboosterbox.html')
+
+#megaevolution
+
+@app.route('/megaevolutionpack')
+def megaevolutionpack():
+    return render_template('megaevolutionpack.html')
+
+@app.route('/megaevolution')
+def megaevolution():
+    return render_template('megaevolutionetb.html')
+
+@app.route('/megaevolutionboosterbundle')
+def megaevolutionboosterbundle():
+    return render_template('megaevolutionboosterbundle.html')
+
+@app.route('/megaevolutionboosterbox')
+def megaevolutionboosterbox():
+    return render_template('megaevolutionboosterbox.html')
+
+#destined rivals
+
+@app.route('/destinedrivalspack')
+def destinedrivalspack():
+    return render_template('destinedrivalspack.html')
+
+@app.route('/destinedrivals')
+def destinedrivals():
+    return render_template('destinedrivalsetb.html')
+
+@app.route('/destinedrivalsboosterbundle')
+def destinedrivalsboosterbundle():
+    return render_template('destinedrivalsboosterbundle.html')
+
+@app.route('/destinedrivalsboosterbox')
+def destinedrivalsboosterbox():
+    return render_template('destinedrivalsboosterbox.html')
+
+#jt
+
+@app.route('/journeytogetherpack')
+def journeytogetherpack():
+    return render_template('journeytogetherpack.html')
+
+@app.route('/journeytogether')
+def journeytogether():
+    return render_template('journeytogetheretb.html')
+
+@app.route('/journeytogetherboosterbundle')
+def journeytogetherboosterbundle():
+    return render_template('journeytogetherboosterbundle.html')
+
+@app.route('/journeytogetherboosterbox')
+def journeytogetherboosterbox():
+    return render_template('journeytogetherboosterbox.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+    

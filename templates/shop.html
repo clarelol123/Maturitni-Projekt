@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- bootstrap link here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- google-font-link-here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
+    <!-- font-awesome-link-here -->
+    <script src="https://kit.fontawesome.com/ca96f48248.js" crossorigin="anonymous"></script>
+
+    <!-- custom-css-link-here -->
+    <link rel="stylesheet" href="static/style.css">
+    <title>PokeDungeon - Pokémon Obchod s Pokémon Karty</title>
+        <link rel="icon" type="image/png" href="static/images/pokedungeon logo.png">
+    
+
+<!-- Design -->
+
+    <style>
+body {
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+.menu-part {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.menu-part .btn {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: all 0.2s ease;
+}
+
+.menu-part .btn:hover {
+    background: #111111 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.16);
+}
+
+header.bg-dark {
+    background: #000000 !important;
+}
+
+header h1 {
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+
+.card-img-top {
+    background: #f7f7f7;
+    padding: 12px;
+}
+
+.badge {
+    background: #000000 !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+
+.btn-success {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background: #111111 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+}
+
+/* ===== CENTERED LOGO TRANSITION (DARK BACKGROUND) ===== */
+
+.page-transition-logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* DARK OVERLAY */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;  /* ON TOP OF EVERYTHING */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.pokeball-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.pokeball {
+    position: absolute;
+    background-image: url("static/images/pokedungeon logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(120vh) rotate(360deg);
+    }
+}
+
+/* ===== MODERN ABSOLUTE LEFT LOGO ===== */
+
+.menu-part {
+    position: relative;
+}
+
+/* Brand container */
+
+.brand {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+/* Logo image */
+
+.brand img {
+    height: 42px;   /* clean modern size */
+    width: auto;
+}
+
+/* Modern text style */
+
+.brand span {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    color: black;
+    letter-spacing: 0.2px;
+}
+
+/* ===== FILTER SIDEBAR STYLE ===== */
+
+.filter-box {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.filter-box h5 {
+    font-weight: 800;
+}
+
+.filter-box h6 {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+</style>
+</head>
+<body>
+<div class="page-transition-logo">
+    <img src="static/images/pokedungeon logo.png" alt="PokeDungeon Logo">
+</div>
+<div class="pokeball-rain"></div>
+<section class="menu-part">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+
+        <!-- LOGO + TEXT -->
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="static/images/pokedungeon logo.png" alt="PokeDungeon Logo">
+            <span>PokeDungeon</span>
+        </a>
+
+        <ul class="nav justify-content-end">           
+                  <li class="nav-item">
+                    <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                    <div class=""><a class="btn btn-primary" href="{{ url_for('home')}}">Domů</a></div>
+                </li>
+                <li class="nav-item">
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class=""><a class="btn btn-primary" href="{{ url_for('shop')}}">Obchod</a></div>
+              </li>
+                  <li class="nav-item">
+                    <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                    <div class=""><a class="btn btn-primary" href="{{ url_for('contacts')}}">Kontakt</a></div>
+                </li>
+              <li class="nav-item">
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class=""><a class="btn btn-primary" href="{{ url_for('ucet')}}">Vytvořit Účet</a></div>
+            </li>
+            <li class="nav-item">
+                <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                <div class=""><a class="btn btn-primary" href="{{ url_for('kosik')}}">Košík</a></div>
+            </li>
+        </div>
+        </div>
+   </section>
+
+        <!-- Header-->
+        <header class="bg-dark py-2">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">PokeDungeon</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Pokémon Eshop s Pokémon Karty</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+<section class="py-5">
+<div class="container-fluid px-4">
+
+<div class="row">
+
+<!-- ===== FILTER SIDEBAR ===== -->
+<div class="col-lg-3 col-md-4 mb-4">
+
+<div class="filter-box">
+<h5>Filters</h5>
+
+<hr>
+
+<h5>Mega Evolution</h5>
+
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="phantasmal" id="filterphantasmal">
+  <label class="form-check-label" for="filterphantasmal">Phantasmal Flames</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="megaevolution" id="filtermegaevolution">
+  <label class="form-check-label" for="filtermegaevolution">Mega Evolution (Base Set)</label>
+</div>
+
+<hr>
+
+<h5>Scarlet and Violet</h5>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="destinedrivals" id="filterdestinedrivals">
+  <label class="form-check-label" for="filterdestinedrivals">Destined Rivals</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="journeytogether" id="filterjourneytogether">
+  <label class="form-check-label" for="filterjourneytogether">Journey Together</label>
+</div>
+
+<hr>
+
+<h5>Ostatní Filtry</h5>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="boosterbox" id="filterboosterbox">
+  <label class="form-check-label" for="filterboosterbox">Booster Boxy</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="packs" id="filterpacks">
+  <label class="form-check-label" for="filterpacks">Booster Packy</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="etbs" id="filteretbs">
+  <label class="form-check-label" for="filteretbs">Elite Trainer Boxy</label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input filter-checkbox" type="checkbox" value="boosterbundles" id="filterboosterbundles">
+  <label class="form-check-label" for="filterboosterbundles">Booster Bundly</label>
+</div>
+
+</div>
+</div>
+
+<!-- ===== PRODUKTY ===== -->
+<div class="col-lg-9 col-md-8">
+
+<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+
+<!-- ===== PHANTASMAL FLAMES ANO!! ===== -->
+
+<div class="col mb-5 filter-item" data-category="phantasmal etbs">
+    <div class="card h-100">
+        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Nové</div>
+        <img class="card-img-top" src="static/images/phantasmal flames etb.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution - Phantasmal Flames Elite Trainer Box</h5>
+                1,499 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('phantasmal')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="phantasmal packs">
+    <div class="card h-100">
+        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Nové</div>
+        <img class="card-img-top" src="static/images/phantasmal flames pack.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution - Phantasmal Flames Booster Pack</h5>
+                129 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('phantasmalflamespack')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="phantasmal boosterbundles">
+    <div class="card h-100">
+        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Nové</div>
+        <img class="card-img-top" src="static/images/phantasmal flames booster bundle.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution - Phantasmal Flames Booster Bundle</h5>
+                999 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('phantasmalflamesboosterbundle')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="phantasmal boosterbox">
+    <div class="card h-100">
+                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Nové</div>
+        <img class="card-img-top" src="static/images/phantasmal flames booster box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution - Phantasmal Flames Booster Box</h5>
+                5,499 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('phantasmalflamesboosterbox')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MEGA EVOLUTION OK ===== -->
+
+<div class="col mb-5 filter-item" data-category="megaevolution etbs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/mega evolution elite trainer box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Elite Trainer Box</h5>
+                1,599 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('megaevolution')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="megaevolution packs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/mega evolution pack.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Pack</h5>
+                129 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('megaevolutionpack')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="megaevolution boosterbundles">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/mega evolution booster bundle.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Bundle</h5>
+                999 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('megaevolutionboosterbundle')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="megaevolution boosterbox">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/mega evolution booster box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Box</h5>
+                5,799 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('megaevolutionboosterbox')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== DESTINED RIVALS DOBREEE ===== -->
+
+<div class="col mb-5 filter-item" data-category="destinedrivals etbs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/destined rivals elite trainer box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Destined Rivals Elite Trainer Box</h5>
+                3,199 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('destinedrivals')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="destinedrivals packs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/destined rivals pack.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Destined Rivals Booster Pack</h5>
+                169 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('destinedrivalspack')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="destinedrivals boosterbundles">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/destined rivals booster bundle.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Destined Rivals Booster Bundle</h5>
+                2,499 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('destinedrivalsboosterbundle')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="destinedrivals boosterbox">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/destined rivals booster box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Destined Rivals Booster Box</h5>
+                8,999 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('destinedrivalsboosterbox')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== JOURNEYTOGETHER JUPIIIIIIII ===== -->
+
+<div class="col mb-5 filter-item" data-category="journeytogether etbs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/journey together elite trainer box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Journey Together Elite Trainer Box</h5>
+                1,799 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('journeytogether')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="journeytogether packs">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/journey together pack.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Journey Together Booster Pack</h5>
+                109 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('journeytogetherpack')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="journeytogether boosterbundles">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/journey together booster bundle.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Journey Together Booster Bundle</h5>
+                899 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('journeytogetherboosterbundle')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col mb-5 filter-item" data-category="journeytogether boosterbox">
+    <div class="card h-100">
+        <img class="card-img-top" src="static/images/journey together booster box.png" alt="..." />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">Pokémon TCG: Scarlet and Violet - Journey Together Booster Box</h5>
+                4,999 Kč
+            </div>
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-success" href="{{ url_for('journeytogetherboosterbox')}}">Koupit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== produkty ano ^ ===== -->
+
+</div> <!-- end row -->
+</div> <!-- end col right -->
+
+</div> <!-- end main row -->
+</div> <!-- end container -->
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+       <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.querySelector(".page-transition-logo");
+
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = this.href;
+
+            // Only apply to internal links
+            if (href && href.includes(window.location.origin)) {
+                e.preventDefault();
+
+                // Show dark background + centered logo
+                overlay.classList.add("active");
+
+                // Start the spin
+                const logo = overlay.querySelector("img");
+                logo.style.animation = "spinLogo 0.7s ease-in-out";
+
+                // Go to next page after spin
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 700);
+            }
+        });
+    });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".pokeball-rain");
+
+    const columns = 14;           // more lanes than before
+    const ballsPerColumn = 12;    // total ≈ 168 balls (14 x 12)
+    const laneWidth = 100 / columns;
+
+    for (let col = 0; col < columns; col++) {
+        for (let i = 0; i < ballsPerColumn; i++) {
+            const ball = document.createElement("div");
+            ball.classList.add("pokeball");
+
+            // Keep them in neat vertical lanes
+            const laneCenter = (col * laneWidth) + (laneWidth / 2);
+            ball.style.left = laneCenter + "vw";
+
+            // Start above the screen so they "rain in"
+            ball.style.top = (-200 - Math.random() * 800) + "px";
+
+            // Mix of big and small
+            const isBig = Math.random() > 0.5;
+            const size = isBig 
+                ? (Math.random() * 20 + 45)   // big: ~45–65px
+                : (Math.random() * 12 + 18);  // small: ~18–30px
+
+            ball.style.width = size + "px";
+            ball.style.height = size + "px";
+
+            // Different fall speeds
+            ball.style.animationDuration = (Math.random() * 6 + 5) + "s";
+
+            // Staggered start so they don’t all drop at once
+            ball.style.animationDelay = Math.random() * 5 + "s";
+
+            container.appendChild(ball);
+        }
+    }
+});
+document.querySelectorAll(".filter-checkbox").forEach(cb => {
+  cb.addEventListener("change", () => {
+
+    const checked = Array.from(document.querySelectorAll(".filter-checkbox:checked"))
+                         .map(c => c.value);
+
+    document.querySelectorAll(".filter-item").forEach(item => {
+      const categories = item.getAttribute("data-category").split(" ");
+
+      // If no filters are selected → show everything
+      if (checked.length === 0) {
+        item.style.display = "block";
+        return;
+      }
+
+      // Show if it matches ANY selected filter
+      const matches = checked.some(f => categories.includes(f));
+
+      item.style.display = matches ? "block" : "none";
+    });
+
+  });
+});
+</script>
+
+    </body>
+</html>

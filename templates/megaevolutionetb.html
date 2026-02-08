@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- bootstrap link here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- google-font-link-here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
+    <!-- font-awesome-link-here -->
+    <script src="https://kit.fontawesome.com/ca96f48248.js" crossorigin="anonymous"></script>
+
+    <!-- custom-css-link-here -->
+    <link rel="stylesheet" href="static/style.css">
+    <title>PokeDungeon - Pokémon Obchod s Pokémon Karty</title>
+        <link rel="icon" type="image/png" href="static/images/pokedungeon logo.png">
+    
+
+<!-- Design -->
+
+    <style>
+body {
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+.menu-part {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.menu-part .btn {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: all 0.2s ease;
+}
+
+.menu-part .btn:hover {
+    background: #111111 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.16);
+}
+
+header.bg-dark {
+    background: #000000 !important;
+}
+
+header h1 {
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+}
+
+.card-img-top {
+    background: #f7f7f7;
+    padding: 12px;
+}
+
+.badge {
+    background: #000000 !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+
+.btn-success {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background: #111111 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+}
+/* ===== CENTERED LOGO TRANSITION (DARK BACKGROUND) ===== */
+
+.page-transition-logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* DARK OVERLAY */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;  /* ON TOP OF EVERYTHING */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.pokeball-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.pokeball {
+    position: absolute;
+    background-image: url("static/images/pokedungeon logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(120vh) rotate(360deg);
+    }
+}
+/* ===== MODERN ABSOLUTE LEFT LOGO ===== */
+
+.menu-part {
+    position: relative;
+}
+
+/* Brand container */
+.brand {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+/* Logo image */
+.brand img {
+    height: 42px;   /* clean modern size */
+    width: auto;
+}
+
+/* Modern text style */
+.brand span {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    color: black;
+    letter-spacing: 0.2px;
+}
+#cursor-canvas { /* NEPOUZIVAM UZ */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+
+</style>
+</head>
+<canvas id="cursor-canvas"></canvas>
+<body>
+<div class="page-transition-logo">
+    <img src="static/images/pokedungeon logo.png" alt="PokeDungeon Logo">
+</div>
+<div class="pokeball-rain"></div>
+<section class="menu-part">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+
+        <!-- LOGO + TEXT (TOP LEFT) -->
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="static/images/pokedungeon logo.png" alt="PokeDungeon Logo">
+            <span>PokeDungeon</span>
+        </a>
+
+        <ul class="nav justify-content-end">           
+                  <li class="nav-item">
+                    <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                    <div class=""><a class="btn btn-primary" href="{{ url_for('home')}}">Domů</a></div>
+                </li>
+                <li class="nav-item">
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class=""><a class="btn btn-primary" href="{{ url_for('shop')}}">Obchod</a></div>
+              </li>
+                  <li class="nav-item">
+                    <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                    <div class=""><a class="btn btn-primary" href="{{ url_for('contacts')}}">Kontakt</a></div>
+                </li>
+              <li class="nav-item">
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class=""><a class="btn btn-primary" href="{{ url_for('ucet')}}">Vytvořit Účet</a></div>
+            </li>
+            <li class="nav-item">
+                <div class="card-footer p-0 pt-0 border-top-0 bg-transparent">
+                <div class=""><a class="btn btn-primary" href="{{ url_for('kosik')}}">Košík</a></div>
+            </li>
+        </div>
+        </div>
+   </section>
+
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="static/images/mega evolution elite trainer box.png" alt="..." /></div>
+                    <div class="col-md-6">
+                        <h1 class="display-5 fw-bolder">Pokémon TCG: Mega Evolution Elite Trainer Box</h1>
+                        <div class="product-price mb-5">
+                        1,599 Kč
+                        </div>
+                        <p class="lead">Staňte se trenérem pokémonů s karetní hrou Pokémon TCG: Mega Evolution Elite Trainer Box. V balení naleznete boostery a další obsah.</p>
+                        <div class="d-flex">
+                                <!-- Pridaní do kosiku pomoci java scriptu-->
+                            <button class="btn btn-success flex-shrink-0" type="button" onclick="pridejDoKosiku('Mega Evolution Elite Trainer Box')">
+                                Přidat do košíku
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Related items section-->
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Další Produkty Z Mega Evolution (Base Set)</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/images/mega evolution pack.png" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Pack</h5>
+                                    <!-- Product price-->
+                                    129 Kč
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-success" href="{{ url_for('megaevolutionpack')}}">Koupit</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/images/mega evolution booster bundle.png" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Bundle</h5>
+                                    <!-- Product price-->
+                                    999 Kč
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-success" href="{{ url_for('megaevolutionboosterbundle')}}">Koupit</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/images/mega evolution booster box.png" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Booster Box</h5>
+                                    <!-- Product price-->
+                                    5,799 Kč
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-success" href="{{ url_for('megaevolutionboosterbox')}}">Koupit</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="static/images/mega evolution elite trainer box.png" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Pokémon TCG: Mega Evolution Elite Trainer Box</h5>
+                                    <!-- Product price-->
+                                    1,599 Kč
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-success" href="{{ url_for('megaevolution')}}">Koupit</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+                <!-- Java Script na pridani do produktu do kosiku-->  
+        <script> 
+                function pridejDoKosiku(nazev) {
+                
+                alert(nazev + " byl přidán do košíku!");
+            }
+        </script>
+    </body>
+</html>
