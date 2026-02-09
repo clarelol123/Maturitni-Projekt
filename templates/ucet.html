@@ -188,7 +188,6 @@ header h1 {
     color: black;
     letter-spacing: 0.2px;
 }
-
 </style>
 </head>
 <body>
@@ -270,8 +269,46 @@ header h1 {
         
         
         <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">                        document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".pokeball-rain");
+
+    const columns = 14;           // more lanes than before
+    const ballsPerColumn = 12;    // total ≈ 168 balls (14 x 12)
+    const laneWidth = 100 / columns;
+
+    for (let col = 0; col < columns; col++) {
+        for (let i = 0; i < ballsPerColumn; i++) {
+            const ball = document.createElement("div");
+            ball.classList.add("pokeball");
+
+            // Keep them in neat vertical lanes
+            const laneCenter = (col * laneWidth) + (laneWidth / 2);
+            ball.style.left = laneCenter + "vw";
+
+            // Start above the screen so they "rain in"
+            ball.style.top = (-200 - Math.random() * 800) + "px";
+
+            // Mix of big and small
+            const isBig = Math.random() > 0.5;
+            const size = isBig 
+                ? (Math.random() * 20 + 45)   // big: ~45–65px
+                : (Math.random() * 12 + 18);  // small: ~18–30px
+
+            ball.style.width = size + "px";
+            ball.style.height = size + "px";
+
+            // Different fall speeds
+            ball.style.animationDuration = (Math.random() * 6 + 5) + "s";
+
+            // Staggered start so they don’t all drop at once
+            ball.style.animationDelay = Math.random() * 5 + "s";
+
+            container.appendChild(ball);
+        }
+    }
+});</script>
         <!-- SB Forms JS -->
+         
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         </body>
         </html>

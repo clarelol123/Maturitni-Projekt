@@ -106,24 +106,6 @@ header h1 {
     box-shadow: 0 8px 18px rgba(0,0,0,0.22);
 }
 
-/* ===== CENTERED LOGO TRANSITION (DARK BACKGROUND) ===== */
-
-.page-transition-logo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* DARK OVERLAY */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;  /* ON TOP OF EVERYTHING */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
 .pokeball-rain {
     position: fixed;
     top: 0;
@@ -211,9 +193,6 @@ header h1 {
 </style>
 </head>
 <body>
-<div class="page-transition-logo">
-    <img src="static/images/pokedungeon logo.png" alt="PokeDungeon Logo">
-</div>
 <div class="pokeball-rain"></div>
 <section class="menu-part">
     <div class="container py-3 d-flex justify-content-between align-items-center">
@@ -628,32 +607,6 @@ header h1 {
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
        <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const overlay = document.querySelector(".page-transition-logo");
-
-    document.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", function(e) {
-            const href = this.href;
-
-            // Only apply to internal links
-            if (href && href.includes(window.location.origin)) {
-                e.preventDefault();
-
-                // Show dark background + centered logo
-                overlay.classList.add("active");
-
-                // Start the spin
-                const logo = overlay.querySelector("img");
-                logo.style.animation = "spinLogo 0.7s ease-in-out";
-
-                // Go to next page after spin
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 700);
-            }
-        });
-    });
-});
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".pokeball-rain");
 
