@@ -248,9 +248,9 @@ header h1 {
                         <p class="lead">Staňte se sběratelem a trenérem pokémonů s karetní hrou Pokémon TCG: Mega Evolution - Phantasmal Flames Booster Pack. V balení naleznete 10 různých karet Pokémon.</p>
                         <div class="d-flex">
                                     <!-- Pridaní do kosiku pomoci java scriptu-->
-                            <button class="btn btn-success flex-shrink-0" type="button" onclick="pridejDoKosiku('Phantasmal Flames Booster Pack')">
+                            <a href="{{ url_for('add_to_cart', product_id='phantasmalflamespack') }}" class="btn btn-success">
                                 Přidat do košíku
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

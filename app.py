@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
+app.secret_key = 'pokedungeon-super-secret-key'
 
 #ostatni
 
@@ -26,7 +27,8 @@ def ucet():
 
 @app.route('/kosik')
 def kosik():
-    return render_template('kosik.html')
+    cart=session.get('cart',[])
+    return render_template('kosik.html', cart=cart)
 
 #phantasmal
 
@@ -96,7 +98,42 @@ def journeytogetherboosterbundle():
 def journeytogetherboosterbox():
     return render_template('journeytogetherboosterbox.html')
 
+# ==== CART SYSTEM ====
+from flask import session, redirect, url_for
+
+PRODUCTS={
+'phantasmalflamespack':('Phantasmal Flames Booster Pack',129),
+'journeytogetherpack':('Journey Together Booster Pack',109),
+'megaevolutionpack':('Mega Evolution Booster Pack',129),
+'destinedrivalspack':('Destined Rivals Booster Pack',169),
+}
+
+@app.route('/add_to_cart/<product_id>')
+def add_to_cart(product_id):
+    if product_id not in PRODUCTS:
+        return redirect(url_for('shop'))
+    name,price=PRODUCTS[product_id]
+    cart=session.get('cart',[])
+    for i in cart:
+        if i['name']==name:
+            i['qty']+=1
+            session['cart']=cart
+            return redirect(url_for('kosik'))
+    cart.append({'name':name,'price':price,'qty':1})
+    session['cart']=cart
+    return redirect(url_for('kosik'))
+
+@app.route('/remove/<int:index>')
+def remove(index):
+    cart=session.get('cart',[])
+    if 0<=index<len(cart):
+        cart.pop(index)
+    session['cart']=cart
+    return redirect(url_for('kosik'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
     
+
