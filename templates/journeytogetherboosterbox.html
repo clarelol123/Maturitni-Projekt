@@ -249,9 +249,7 @@ header h1 {
                         <p class="lead">Staňte se trenérem pokémonů s karetní hrou Pokémon TCG: Scarlet and Violet - Journey Together Booster Box (36 boosterů). Cena je platná za celý box obsahující 36 balíčků.</p>
                         <div class="d-flex">
                                     <!-- Pridaní do kosiku pomoci java scriptu-->
-                            <button class="btn btn-success flex-shrink-0" type="button" onclick="pridejDoKosiku('Journey Together Booster Box')">
-                                Přidat do košíku
-                            </button>
+                            <a href="{{ url_for('add_to_cart', product_id='journeytogetherboosterbox') }}" class="btn btn-success">Přidat do košíku</a>
                         </div>
                     </div>
                 </div>

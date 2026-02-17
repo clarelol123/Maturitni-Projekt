@@ -249,9 +249,7 @@ header h1 {
                         <p class="lead">Staňte se trenérem pokémonů s karetní hrou Pokémon TCG: Scarlet and Violet - Destined Rivals Elite Trainer Box. V balení naleznete boostery a další obsah.</p>
                         <div class="d-flex">
                                 <!-- Pridaní do kosiku pomoci java scriptu-->
-                            <button class="btn btn-success flex-shrink-0" type="button" onclick="pridejDoKosiku('Destined Rivals Elite Trainer Box')">
-                                Přidat do košíku
-                            </button>
+                            <a href="{{ url_for('add_to_cart', product_id='destinedrivalsetb') }}" class="btn btn-success">Přidat do košíku</a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,92 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for
 
 app = Flask(__name__)
-app.secret_key = 'pokedungeon-super-secret-key'
+app.secret_key='pokedungeon-secret'
+
+PRODUCTS = {
+    "destinedrivalsboosterbox": {
+        "name": "Destinedrivalsboosterbox",
+        "price": 8999,
+        "image": "pokedungeon logo.png"
+    },
+    "destinedrivalsboosterbundle": {
+        "name": "Destinedrivalsboosterbundle",
+        "price": 2499,
+        "image": "pokedungeon logo.png"
+    },
+    "destinedrivalsetb": {
+        "name": "Destinedrivalsetb",
+        "price": 3199,
+        "image": "pokedungeon logo.png"
+    },
+    "destinedrivalspack": {
+        "name": "Destinedrivalspack",
+        "price": 169,
+        "image": "pokedungeon logo.png"
+    },
+    "journeytogetherboosterbox": {
+        "name": "Journeytogetherboosterbox",
+        "price": 4999,
+        "image": "pokedungeon logo.png"
+    },
+    "journeytogetherboosterbundle": {
+        "name": "Journeytogetherboosterbundle",
+        "price": 899,
+        "image": "pokedungeon logo.png"
+    },
+    "journeytogetheretb": {
+        "name": "Journeytogetheretb",
+        "price": 1799,
+        "image": "pokedungeon logo.png"
+    },
+    "journeytogetherpack": {
+        "name": "Journeytogetherpack",
+        "price": 109,
+        "image": "pokedungeon logo.png"
+    },
+    "megaevolutionboosterbox": {
+        "name": "Megaevolutionboosterbox",
+        "price": 5799,
+        "image": "pokedungeon logo.png"
+    },
+    "megaevolutionboosterbundle": {
+        "name": "Megaevolutionboosterbundle",
+        "price": 999,
+        "image": "pokedungeon logo.png"
+    },
+    "megaevolutionetb": {
+        "name": "Megaevolutionetb",
+        "price": 1599,
+        "image": "pokedungeon logo.png"
+    },
+    "megaevolutionpack": {
+        "name": "Megaevolutionpack",
+        "price": 129,
+        "image": "pokedungeon logo.png"
+    },
+    "phantasmalflamesboosterbox": {
+        "name": "Phantasmalflamesboosterbox",
+        "price": 5499,
+        "image": "pokedungeon logo.png"
+    },
+    "phantasmalflamesboosterbundle": {
+        "name": "Phantasmalflamesboosterbundle",
+        "price": 999,
+        "image": "pokedungeon logo.png"
+    },
+    "phantasmalflamesetb": {
+        "name": "Phantasmalflamesetb",
+        "price": 1499,
+        "image": "pokedungeon logo.png"
+    },
+    "phantasmalflamespack": {
+        "name": "Phantasmalflamespack",
+        "price": 129,
+        "image": "pokedungeon logo.png"
+    }
+}
+
+app.secret_key='pokedungeon-secret'
 
 #ostatni
 
@@ -27,8 +112,8 @@ def ucet():
 
 @app.route('/kosik')
 def kosik():
-    cart=session.get('cart',[])
-    return render_template('kosik.html', cart=cart)
+    cart=session.get('cart',{})
+    return render_template('kosik.html', cart=cart, products=PRODUCTS)
 
 #phantasmal
 
@@ -98,42 +183,49 @@ def journeytogetherboosterbundle():
 def journeytogetherboosterbox():
     return render_template('journeytogetherboosterbox.html')
 
-# ==== CART SYSTEM ====
-from flask import session, redirect, url_for
 
-PRODUCTS={
-'phantasmalflamespack':('Phantasmal Flames Booster Pack',129),
-'journeytogetherpack':('Journey Together Booster Pack',109),
-'megaevolutionpack':('Mega Evolution Booster Pack',129),
-'destinedrivalspack':('Destined Rivals Booster Pack',169),
-}
 
-@app.route('/add_to_cart/<product_id>')
+    
+@app.route("/add_to_cart/<product_id>")
 def add_to_cart(product_id):
     if product_id not in PRODUCTS:
         return redirect(url_for('shop'))
-    name,price=PRODUCTS[product_id]
-    cart=session.get('cart',[])
-    for i in cart:
-        if i['name']==name:
-            i['qty']+=1
-            session['cart']=cart
-            return redirect(url_for('kosik'))
-    cart.append({'name':name,'price':price,'qty':1})
+    cart=session.get('cart',{})
+    if product_id in cart:
+        cart[product_id]['qty']+=1
+    else:
+        p=PRODUCTS[product_id]
+        cart[product_id]={'name':p['name'],'price':p['price'],'image':p['image'],'qty':1}
     session['cart']=cart
     return redirect(url_for('kosik'))
 
-@app.route('/remove/<int:index>')
-def remove(index):
-    cart=session.get('cart',[])
-    if 0<=index<len(cart):
-        cart.pop(index)
+@app.route("/remove_from_cart/<product_id>")
+def remove_from_cart(product_id):
+    cart=session.get('cart',{})
+    cart.pop(product_id,None)
     session['cart']=cart
     return redirect(url_for('kosik'))
 
+
+
+
+@app.route("/plus/<product_id>")
+def plus(product_id):
+    cart=session.get('cart',{})
+    if product_id in cart:
+        cart[product_id]['qty']+=1
+    session['cart']=cart
+    return redirect(url_for('kosik'))
+
+@app.route("/minus/<product_id>")
+def minus(product_id):
+    cart=session.get('cart',{})
+    if product_id in cart:
+        cart[product_id]['qty']-=1
+        if cart[product_id]['qty']<=0:
+            cart.pop(product_id)
+    session['cart']=cart
+    return redirect(url_for('kosik'))
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    
-
