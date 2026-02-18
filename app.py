@@ -106,9 +106,9 @@ def contacts():
 def phantasmal():
     return render_template('phantasmalflamesetb.html')
 
-@app.route('/ucet')
-def ucet():
-    return render_template('ucet.html')
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
 
 @app.route('/kosik')
 def kosik():
@@ -227,5 +227,20 @@ def minus(product_id):
     session['cart']=cart
     return redirect(url_for('kosik'))
 
+# ===== Fake order completion =====
+from flask import redirect, url_for, session
+import random, string
+
+@app.route('/konec_objednavky', methods=['POST'])
+def konec_objednavky():
+    if not session.get('cart'):
+        return redirect(url_for('kosik'))
+    order_id = 'PD-' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+    session.pop('cart', None)
+    return render_template('objednavkakonec.html', order_id=order_id)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
